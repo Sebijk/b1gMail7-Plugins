@@ -11,8 +11,8 @@ class modopenfire extends BMPlugin
 	function modopenfire()
 	{
 		$this->name					= 'Jabber Openfire-Integration';
-		$this->version				= '1.0.6';
-		$this->designedfor			= '7.1.0';
+		$this->version				= '1.1.0';
+		$this->designedfor			= '7.3.0';
 		$this->type					= BMPLUGIN_DEFAULT;
 
 		$this->author				= 'Home of the Sebijk.com';
@@ -24,6 +24,7 @@ class modopenfire extends BMPlugin
 
 		$this->admin_pages			=  true;
 		$this->admin_page_title		= 'Openfire-Integration';
+		$this->admin_page_icon		= "openfire_icon.png";
 	}
 
 	/*
@@ -61,7 +62,7 @@ class modopenfire extends BMPlugin
 		global $db;
 
 		// drop von mod_openfire
-		$sql = $db->Query("DROP TABLE {pre}mod_openfire;");
+		$db->Query("DROP TABLE {pre}mod_openfire;");
 
 		PutLog('Plugin "'. $this->name .' - '. $this->version .'" wurde erfolgreich deinstalliert.', PRIO_PLUGIN, __FILE__, __LINE__);
 		return(true);
@@ -78,7 +79,8 @@ class modopenfire extends BMPlugin
 			0 => array(
 				'title'		=> $lang_admin['prefs'],
 				'link'		=> $this->_adminLink() . '&',
-				'active'	=> $_REQUEST['plugin'] == 'modopenfire'
+				'active'	=> $_REQUEST['plugin'] == 'modopenfire',
+				'icon'		=> '../plugins/templates/images/openfire_logo.png'
 			)
 		);
 		$tpl->assign('tabs', $tabs);
@@ -153,26 +155,18 @@ class modopenfire extends BMPlugin
 			$this->_sendhttp($url);
 		}
 	}
-	
-	function FileHandler($file, $action)
+
+	function OnUserPasswordChange($userID, $oldPasswordMD5, $newPasswordMD5, $newPasswordPlain)
 	{
 		global $userRow;
 
-		// Kennwort ändern
-		if($file=='prefs.php' && $_REQUEST['do']=='changePW' && $this->_enableAuth())
+		if($this->_enableAuth())
 		{
-			// password
-			$suPass1 = $_POST['pass1'];
-			$suPass2 = $_POST['pass2'];
-	
-			if(strlen($suPass1) >= 3 && $suPass1 == $suPass2)
-			{
-				$voller_name = trim($userRow['vorname'])." ".trim($userRow['nachname']);
-				$benutzername = explode("@", $userRow['email']);
+			$voller_name = trim($userRow['vorname'])." ".trim($userRow['nachname']);
+			$benutzername = explode("@", $userRow['email']);
 
-				$url = $this->_getUrl()."&type=update&username=".$this->_toRawUrl($benutzername[0])."&password=".$this->_toRawUrl($suPass1)."&name=".$this->_toRawUrl($voller_name)."&email=".$this->_toRawUrl($userRow['email']);
-				$this->_sendhttp($url);
-			}
+			$url = $this->_getUrl()."&type=update&username=".$this->_toRawUrl($benutzername[0])."&password=".$this->_toRawUrl($newPasswordPlain)."&name=".$this->_toRawUrl($voller_name)."&email=".$this->_toRawUrl($userRow['email']);
+			$this->_sendhttp($url);
 		}
 	}
 

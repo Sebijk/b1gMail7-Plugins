@@ -5,8 +5,8 @@
 	{if $erfolg}<center>{$erfolg}</center>{/if}
 	<table>
 		<tr>
-			<td align="left" rowspan="7" valign="top" width="40"><img src="../plugins/templates/images/openfire_logo.gif" border="0" alt="" /></td>
-			<td class="td1" width="160">{lng p="enable"}?</td>
+			<td align="left" rowspan="7" valign="top" width="48"><img src="../plugins/templates/images/openfire_logo.png" border="0" alt="" /></td>
+			<td class="td1" width="220">{lng p="enable"}?</td>
 			<td class="td2"><input name="openfire_enableAuth"{if $openfire_prefs.enableAuth} checked="checked"{/if} type="checkbox" /></td>
 		</tr>
 		<tr>
@@ -28,10 +28,10 @@
 	</table>
 	<p>
 		<div style="float:right;">
-			<input type="submit" name="save" value=" {lng p="save"} " />
+			<input type="submit" name="save" value=" {lng p="save"} " class="button" />
 		</div>
 	</p>
 	</form>
 </fieldset>
 
-<center><p /><font size="1">b1gMail Openfire-Integration &copy; 2007 - 2008, <a href="http://www.sebijk.com/deref.php?http://www.sebijk.com" target="_blank">Home of the Sebijk.com</a></font></center>
+<center><p /><font size="1">b1gMail Openfire-Integration &copy; 2007 - 2008, <a href="http://www.sebijk.com" target="_blank">Home of the Sebijk.com</a></font></center>
