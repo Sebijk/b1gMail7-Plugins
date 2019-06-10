@@ -1,0 +1,27 @@
+1. App "User External" in Owncloud aktivieren.
+2. config/config.php öffnen
+3. In der $Config-Array folgendes einfügen:
+------
+'user_backends' => array (
+    0 => array (
+         "class"     => 'OC_User_b1gMail',
+        "arguments" => array (
+                 0 => '{}'
+                 ),
+    ),
+  ), 
+------
+
+5. Entweder in config/config.php folgendes am Anfang des Codes einfügen:
+------
+require_once(dirname(__FILE__).'/../apps/user_external/lib/b1gmail.php'); 
+------
+ODER apps/user_externalappinfo/app.php öffnen und folgendes am Anfang einfügen:
+------
+OC::$CLASSPATH['OC_User_b1gMail']='user_external/lib/b1gmail.php';
+
+6. Mitgeliferte b1gmail.php öffnen und dort die Variablen DBUser, DBPass und DBName anpassen.
+7. b1gmail.php nach apps/user_external/lib kopieren
+8. Testen, ob es klappt.
+
+Hinweis bei ownCloud-Updates: Nach einem ownCloud-Update müssen Schritt 5-8 wiederholt werden.
