@@ -1,0 +1,121 @@
+.googie_window {
+  font-size: 12px;
+ font-family: tahoma,helvetica;
+ color: #000000;
+ background-color: #cfcfcf;
+  text-align: left;
+  border: 1px solid #555;
+  margin: 0;
+  position: absolute;
+  visibility: hidden;
+  z-index: 300;
+  padding: 1px;
+  width: 165px;
+}
+
+.googie_list {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+ font-family: tahoma,helvetica;
+}
+
+.googie_list td {
+  padding: 1px 0 1px 0;
+  cursor: pointer;
+  list-style-type: none;
+  color: #000;
+  font-size: 12px;
+}
+
+.googie_list_onhover {
+  background-color: #FBEC72;
+  font-size: 12px;
+ font-family: tahoma,helvetica;
+}
+
+.googie_list_onout {
+  background-color: #CFCFCF;
+  font-size: 12px;
+ font-family: tahoma,helvetica;
+}
+
+.googie_list_selected {
+  background-color: #ccc;
+  font-size: 12px;
+ font-family: tahoma,helvetica;
+}
+
+.googie_list_revert {
+  color: #b91479;
+ font-family: tahoma,helvetica;
+  font-size: 12px;
+}
+
+.googie_edit_layer{
+ font-family: tahoma,helvetica;
+  font-size: 12px;
+}
+
+.googie_list_close {
+  color: #b91414;
+  font-size: 12px;
+}
+
+.googie_link {
+  color: #b91414;
+ font-family: tahoma,helvetica;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.googie_check_spelling_link {
+  color: #0049B7;
+ font-family: tahoma,helvetica;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.googie_no_style {
+ font-family: tahoma,helvetica;
+ color: #000000;
+  font-size: 12px;
+}
+
+.googie_resume_editing {
+  color: green;
+ font-family: tahoma,helvetica;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.googie_check_spelling_ok {
+  color: white;
+  background-color: green;
+ font-family: tahoma,helvetica;
+  padding-left: 2px;
+  padding-right: 2px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.googie_lang_3d_click img {
+  vertical-align: middle;
+  border-top: 1px solid #555;
+  border-left: 1px solid #555;
+  border-right: 1px solid #b1b1b1;
+  border-bottom: 1px solid #b1b1b1;
+  font-size: 12px;
+}
+
+.googie_lang_3d_on img {
+  vertical-align: middle;
+  border-top: 1px solid #b1b1b1;
+  border-left: 1px solid #b1b1b1;
+  border-right: 1px solid #555;
+  border-bottom: 1px solid #555;
+  font-size: 12px;
+}
