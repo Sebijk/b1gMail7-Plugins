@@ -1,0 +1,18 @@
+ejabberd Authentification to b1gMail database
+================================================================================
+Version: 0.9.0
+URL: http://www.sebijk.com
+
+Note: This is only for b1gMail version 7.0 - 7.2, not for 7.3. It should work also with older b1gMail Version 6.
+
+1. Edit auth_b1gmail.pl and change the DB settings above.
+2. Upload auth_b1gmail.pl to your ejabberd folder (example to /etc/ejabberd) and make it executable with "chmod +x auth_b1gmail.pl"
+3. Edit the Jabber configuration file (/etc/ejabberd/ejabberd.conf) and change the authentication method:
+
+   "{auth_method, external}.
+    {extauth_program, "/etc/ejabberd/auth_b1gmail.pl"}"
+    
+(without "")
+    
+4. (Re)start your Jabber server.
+4. Done!
