@@ -42,6 +42,15 @@ class modcheckmail extends BMPlugin
 			$tpl->display($this->_templatePath('checkmail.extern.tpl'));
 		}
 	}
+	function BeforePageTabsAssign(&$pageTabs)
+	{
+		$pageTabs['checkmail'] = array(
+					'faIcon'	=> 'fa-spinner',
+					'link'		=> 'javascript://Checkmail" onclick="window.open(\'start.php?action=checkmail&sid='.session_id().'\',\'checkmail\',\'toolbar=no,width=190,height=280,resizable=yes,scrollbars=no\');" sid="',
+					'text'		=> "CheckMail",
+					'order'		=> 102
+				);
+	}
 }
 /**
  * register plugin
