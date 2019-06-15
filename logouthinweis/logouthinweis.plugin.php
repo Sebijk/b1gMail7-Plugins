@@ -107,7 +107,12 @@ class LogoutHinweis extends BMPlugin
           $sql = $db->Query("UPDATE {pre}users SET loggedout2=1 WHERE id=?",$userID);
           $tpl->assign('title', $lang_user['logouthinweis_title']);
           $tpl->assign('msg', $row['hinweistext']);
-          $tpl->assign('backLink', 'start.php?sid=' . session_id());
+          if($_SERVER['PHP_SELF']=='/m/index.php') { // Wenn mobiles Login
+            $tpl->assign('backLink', 'email.php?sid=' . session_id());
+          }
+          else {
+            $tpl->assign('backLink', 'start.php?sid=' . session_id());
+          }
           $tpl->assign('page', $this->_templatePath('logouthinweis.plugin.tpl'));
           $tpl->display('nli/index.tpl');
           exit();
