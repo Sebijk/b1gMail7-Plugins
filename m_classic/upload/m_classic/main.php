@@ -219,7 +219,9 @@ elseif ($_REQUEST['action'] == 'sendMail') {
                 $mail = _new('BMMailBuilder');
 
                 // mandatory headers
-                $mail->AddHeaderField('X-Sender-IP', $_SERVER['REMOTE_ADDR']);
+                if ($bm_prefs['write_xsenderip'] == 'yes') {
+                    $mail->AddHeaderField('X-Sender-IP', $_SERVER['REMOTE_ADDR']);
+                }
                 $mail->AddHeaderField('From', $from);
                 $mail->AddHeaderField('Subject', $subject);
                 $mail->AddHeaderField('Reply-To', $replyTo);
@@ -320,9 +322,16 @@ elseif ($_REQUEST['action'] == 'sendMail') {
  * logout
  */
 elseif ($_REQUEST['action'] == 'logout') {
+    // delete token?
+    if (isset($_COOKIE['bm_savedToken'])) {
+        BMUser::DeleteSavedLogin($_COOKIE['bm_savedToken']);
+    }
     // delete cookies
     setcookie('bm_savedUser', '', time() - TIME_ONE_HOUR);
-    setcookie('bm_savedPassword', '', time() - TIME_ONE_HOUR);
+    if (isset($_COOKIE['savedPassword'])) {
+        setcookie('bm_savedPassword', '', time() - TIME_ONE_HOUR);
+    }
+    setcookie('bm_savedToken', '', time() - TIME_ONE_HOUR);
     setcookie('bm_savedLanguage', '', time() - TIME_ONE_HOUR);
     setcookie('bm_savedSSL', '', time() - TIME_ONE_HOUR);
     BMUser::Logout();

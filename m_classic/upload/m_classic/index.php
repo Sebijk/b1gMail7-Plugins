@@ -25,11 +25,11 @@ include '../serverlib/init.inc.php';
  * default action = login
  */
 if (!isset($_REQUEST['action'])) {
-    if (isset($_COOKIE['bm_savedUser'])) {
-        $password = $_COOKIE['bm_savedPassword'];
+    if (isset($_COOKIE['bm_savedToken'])) {
+        $password = BMUser::LoadLogin($_COOKIE['bm_savedToken']);
         $email = $_COOKIE['bm_savedUser'];
         $language = $_COOKIE['bm_savedLanguage'];
-        list($result, $param) = BMUser::Login($email, $password);
+        list($result, $param) = BMUser::Login($email, $password, true, true);
 
         if ($result == USER_OK) {
             // stats
@@ -69,6 +69,10 @@ if ($_REQUEST['action'] == 'login') {
 
         // login ok?
         if ($result == USER_OK) {
+            // delete token?
+            if (isset($_COOKIE['bm_savedToken'])) {
+                BMUser::DeleteSavedLogin($_COOKIE['bm_savedToken']);
+            }
             // stats
             Add2Stat('mobile_login');
 
@@ -76,9 +80,23 @@ if ($_REQUEST['action'] == 'login') {
             $_SESSION['bm_sessionLanguage'] = $language;
             // set cookies
             if ($savelogin == true) {
+                $cookieToken = BMUser::SaveLogin($password);
+
+                // set cookies
                 setcookie('bm_savedUser', $email, time() + TIME_ONE_YEAR);
-                setcookie('bm_savedPassword', $password, time() + TIME_ONE_YEAR);
+                if (isset($_COOKIE['savedPassword'])) {
+                    setcookie('bm_savedPassword', '', time() - TIME_ONE_HOUR);
+                }
+                setcookie('bm_savedToken', $cookieToken, time() + TIME_ONE_YEAR);
                 setcookie('bm_savedLanguage', $language, time() + TIME_ONE_YEAR);
+            } else {
+                // delete cookies
+                setcookie('bm_savedUser', '', time() - TIME_ONE_HOUR);
+                if (isset($_COOKIE['savedPassword'])) {
+                    setcookie('bm_savedPassword', '', time() - TIME_ONE_HOUR);
+                }
+                setcookie('bm_savedToken', '', time() - TIME_ONE_HOUR);
+                setcookie('bm_savedLanguage', $language, time() - TIME_ONE_HOUR);
             }
 
             // redirect to target page
