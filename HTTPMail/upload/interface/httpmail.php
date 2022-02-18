@@ -20,7 +20,6 @@
  */
 
 define('INTERFACE_MODE', true);
-define('DEBUG', true);
 include '../serverlib/init.inc.php';
 include '../serverlib/mailbox.class.php';
 include '../serverlib/httpmail_server.class.php';
