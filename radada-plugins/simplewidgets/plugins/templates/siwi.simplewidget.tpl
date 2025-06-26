@@ -1,0 +1,1 @@
+<div class="innerWidget">{if $siwi_content.$key.nosmarty}{$siwi_content.$key.data}{else}{eval var=$siwi_content.$key.data}{/if}</div>
